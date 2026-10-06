@@ -29,4 +29,13 @@ jobs:
         run: pytest
 
       - name: Build Docker image
-        run: docker build -t devops-cicd-app .
+        run: docker build -t kunalsingh9038/devops-cicd-project:latest .
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push Docker image
+        run: docker push kunalsingh9038/devops-cicd-project:latest
